@@ -11,7 +11,6 @@ $result = Hamrahpay::Instance($api_key)
     ->Email('test@eample.com')
     ->Mobile('09121234567')
     ->PaymentRequest();
+$result = json_decode($result,true);
 if (!empty($result['status']) && $result['status']==1)
-    echo $result['pay_url'];
-
-var_dump($result);
+    echo '<a href="'.$result['pay_url'].'">ورود به صفحه ی پرداخت</a>';

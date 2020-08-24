@@ -90,14 +90,14 @@ class Hamrahpay
     // This method sets the payment allowed cards
     public function AllowedCards($cards=[])
     {
-        $this->params['allowed_cards'] = $cards;
+        $this->params['allowed_cards'] = json_encode($cards);
         return $this;
     }
 
     // This method sets the payment merchants wages in shared IPGs
     public function Wages($wages=[])
     {
-        $this->params['wages'] = $wages;
+        $this->params['wages'] = json_encode($wages);
         return $this;
     }
 
