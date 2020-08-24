@@ -1,6 +1,6 @@
 ### کد مثال ارتباط با وب سرویس درگاه پرداخت آنلاین همراه پِی
 
-<p style="direction:rtl;text-align:right">
+<div style="direction:rtl;text-align:right">
     - در فایل payment-request.php مقدار YOUR-API-KEY را با API Key کسب و کار خود و مقدار HTTPS://YOUR-CALLBACK-URL.COM/CALLBACK را با آدرس بازگشت پس از پرداخت به وب سایت خود را جایگزین نمایید
 	
 	- در فایل verify-payment.php  نیز مقدار YOUR-API-KEY را با API Key کسب و کار خود جایگزین نمایید.
@@ -10,4 +10,4 @@
 	
 	-در صورت هرگونه مشکل و یا سوال میتوانید از پشتیبانی همراه پی درخواست کمک نمایید.
 	
-</p>
+</div>
