@@ -10,6 +10,7 @@ class Hamrahpay
     private $second_api_url = 'https://api.hamrahpay.ir/api';
     private $params         = [];
     private $pay_request_format = 'raw'; // qr code
+    private $pay_url         = null;
     public function __construct($api_key)
     {
         $this->api_url          .= '/'.$this->api_version;
@@ -30,7 +31,12 @@ class Hamrahpay
     // This method Requests payment token
     public function PaymentRequest()
     {
-        return $this->post_data($this->getApiUrl('/rest/pg/pay-request/'.$this->pay_request_format));
+        $result = $this->post_data($this->getApiUrl('/rest/pg/pay-request/'.$this->pay_request_format));
+        $result = json_decode($result,true);
+        if ($result['status']==1)
+            $this->pay_url = $result['pay_url'];
+
+        return $result;
     }
 
     // This method check that the payment_token is paid or not
@@ -39,7 +45,8 @@ class Hamrahpay
         $this->params = [];
         $this->params['api_key'] = $this->api_key;
         $this->params['payment_token'] = $payment_token;
-        return $this->post_data($this->getApiUrl('/rest/pg/verify'));
+        $result =  $this->post_data($this->getApiUrl('/rest/pg/verify'));
+        return json_decode($result);
     }
 
     // This method returns unverified payments
@@ -47,7 +54,8 @@ class Hamrahpay
     {
         $this->params = [];
         $this->params['api_key'] = $this->api_key;
-        return $this->post_data($this->getApiUrl('/rest/pg/get-unverfied-payments'));
+        $result = $this->post_data($this->getApiUrl('/rest/pg/get-unverfied-payments'));
+        return json_decode($result);
     }
 
     // This method sends the data to api
@@ -140,6 +148,20 @@ class Hamrahpay
     {
         $this->pay_request_format = 'qrcode';
         return $this;
+    }
+
+    public function Redirect()
+    {
+        if ($this->pay_url!=null)
+        {
+            header('Location: '.$this->pay_url);
+            die;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 }
 ?>
