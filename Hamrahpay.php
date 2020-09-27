@@ -4,8 +4,8 @@
 class Hamrahpay
 {
     private static $instance = null;
-    private $api_version    = "v1";
     private $api_key      = "null";
+    private $api_version    = "v1";
     private $api_url        = 'https://api.hamrahpay.com/api';
     private $second_api_url = 'https://api.hamrahpay.ir/api';
     private $params         = [];
@@ -14,7 +14,7 @@ class Hamrahpay
     public function __construct($api_key)
     {
         $this->api_url          .= '/'.$this->api_version;
-        $this->second_api_url   .= '/'.$this->second_api_url;
+        $this->second_api_url   .= '/'.$this->api_version;
         $this->params['api_key'] = $api_key;
         $this->api_key           = $api_key;
     }
